@@ -31,15 +31,15 @@ class _HomePageState extends State<HomePage> {
       }
     }
     // //======================================= logging is here
-    // print(" you have fetched  ${posts.length} post");
+    print(" you have fetched  ${posts.length} post");
     return posts;
   }
 
-  // @override
-  // void initState() {
-  //   fetchData();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
