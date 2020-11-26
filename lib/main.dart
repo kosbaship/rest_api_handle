@@ -1,8 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:convert' as convert;
-import 'package:http/http.dart' as http;
+// import 'dart:convert' as convert;
+// import 'package:http/http.dart' as http;
 
 import 'model/post_model.dart';
 
@@ -18,17 +19,38 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<PostModel> _posts = List<PostModel>();
 
+  // Future<List<PostModel>> fetchData () async {
+  //   var posts = List<PostModel>();
+  //
+  //   var url = "https://jsonplaceholder.typicode.com/posts";
+  //   http.Response response = await http.get(url);
+  //
+  //   if (response.statusCode == 200){
+  //     var postsJsonObject = convert.json.decode(response.body);
+  //     for(var post in postsJsonObject){
+  //       posts.add(PostModel.fromJson(post));
+  //     }
+  //   }
+  //   return posts;
+  // }
   Future<List<PostModel>> fetchData () async {
     var posts = List<PostModel>();
 
     var url = "https://jsonplaceholder.typicode.com/posts";
-    http.Response response = await http.get(url);
-
-    if (response.statusCode == 200){
-      var postsJsonObject = convert.json.decode(response.body);
-      for(var post in postsJsonObject){
-        posts.add(PostModel.fromJson(post));
+    try {
+      Response response = await Dio().get(url);
+      if (response.statusCode == 200){
+        // ====================== the only change is ===========
+        // convert.json.decode(response.body) && response.data
+        var postsJsonObject = response.data;
+        for(var post in postsJsonObject){
+          posts.add(PostModel.fromJson(post));
+        }
       }
+      print(posts.length);
+
+    } catch (e) {
+      print(e);
     }
     return posts;
   }
