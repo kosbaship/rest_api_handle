@@ -30,14 +30,17 @@ class _HomePageState extends State<HomePage> {
         posts.add(PostModel.fromJson(post));
       }
     }
-    // //======================================= logging is here
-    print(" you have fetched  ${posts.length} post");
     return posts;
   }
 
   @override
   void initState() {
-    fetchData();
+    fetchData().then((value) {
+      setState(() {
+        _posts.addAll(value);
+      });
+
+    });
     super.initState();
   }
 
