@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  var dataSourcePosts = [];
+  static var dataSourcePosts = [];
 
-  fetchData() async {
+  static fetchData() async {
     try {
       Dio dio = Dio();
       dio.options.baseUrl = 'https://jsonplaceholder.typicode.com/';

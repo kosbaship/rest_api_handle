@@ -14,10 +14,8 @@ class HomeCubit extends Cubit<PostsStates> {
       // change to loading
       emit(PostsLoadingState());
 
-      DioHelper dioHelper = DioHelper();
-
       // fetch the data from the API Direct
-      await dioHelper.fetchData().then((response) {
+      await DioHelper.fetchData().then((response) {
         // store the list inside a new one here
         cubitPosts = response;
 
