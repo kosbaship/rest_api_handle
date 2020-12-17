@@ -1,6 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rest_api_handle/layout/cubit/states.dart';
+import 'package:rest_api_handle/network/api_helper.dart';
 
 class HomeCubit extends Cubit<PostsStates> {
   HomeCubit() : super(PostsInitialState());
@@ -14,13 +14,12 @@ class HomeCubit extends Cubit<PostsStates> {
       // change to loading
       emit(PostsLoadingState());
 
-      Dio dio = Dio();
-      dio.options.baseUrl = 'https://jsonplaceholder.typicode.com/';
+      DioHelper dioHelper = DioHelper();
 
       // fetch the data from the API Direct
-      await dio.get('posts').then((response) {
+      await dioHelper.fetchData().then((response) {
         // store the list inside a new one here
-        cubitPosts = response.data as List;
+        cubitPosts = response;
 
         // change the state
         emit(PostsSuccessState());

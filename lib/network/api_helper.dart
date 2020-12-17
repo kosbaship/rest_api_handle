@@ -1,21 +1,21 @@
-/*import 'package:dio/dio.dart';
-import 'package:rest_api_handle/model/post_model.dart';
+import 'package:dio/dio.dart';
 
 class DioHelper {
-  var dataSourcePosts = List<PostModel>();
+  var dataSourcePosts = [];
 
-  Future<List<PostModel>> fetchData() async {
+  fetchData() async {
     try {
       Dio dio = Dio();
       dio.options.baseUrl = 'https://jsonplaceholder.typicode.com/';
-      await dio.get('posts').then((value) {
-        dataSourcePosts = (value.data as List)
-            .map((json) => PostModel.fromJson(json))
-            .toList();
+
+      // fetch the data from the API Direct
+      await dio.get('posts').then((response) {
+        // store the list inside a new one here
+        dataSourcePosts = response.data as List;
       });
     } catch (error) {
       print(error);
     }
     return dataSourcePosts;
   }
-}*/
+}
