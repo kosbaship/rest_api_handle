@@ -5,7 +5,7 @@ class PostsInitialState extends PostsStates {}
 class PostsLoadingState extends PostsStates {}
 
 class PostsSuccessState extends PostsStates {
-  final postsFromCubit;
+  final List<dynamic> postsFromCubit;
 
   PostsSuccessState(this.postsFromCubit);
 }

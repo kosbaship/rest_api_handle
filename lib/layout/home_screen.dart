@@ -21,8 +21,8 @@ class HomePage extends StatelessWidget {
           ));
         }
         if (state is PostsSuccessState) {
-          // read the List of posts and parse it
-          renderPosts = (HomeCubit.get(context).cubitPosts)
+          // read the List of posts and parse it from cubit through Successful state
+          renderPosts = state.postsFromCubit
               .map((json) => PostModel.fromJson(json))
               .toList();
         }

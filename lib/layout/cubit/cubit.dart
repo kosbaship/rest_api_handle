@@ -11,23 +11,21 @@ class HomeCubit extends Cubit<PostsStates> {
   List cubitPosts = [];
 
   getPosts() async {
-    if (cubitPosts.length == 0) {
-      // change to loading
-      emit(PostsLoadingState());
+    // change to loading
+    emit(PostsLoadingState());
 
-      // fetch the data from the API Direct Via Repository
-      // Because the api extends the Repo (PolyMorphism)
-      await postRepository.fetchData().then((postsFromApi) {
-        // store the list inside a new one here
-        cubitPosts = postsFromApi;
+    // fetch the data from the API Direct Via Repository
+    // Because the api extends the Repo (PolyMorphism)
+    await postRepository.fetchData().then((postsFromApi) {
+      // store the list inside a new one here
+      cubitPosts = postsFromApi;
 
-        // change the state
-        // and send the list of data with it
-        emit(PostsSuccessState(cubitPosts));
-      }).catchError((onError) {
-        // handel error
-        emit(PostsErrorState(onError));
-      });
-    }
+      // change the state
+      // and send the list of data with it
+      emit(PostsSuccessState(cubitPosts));
+    }).catchError((onError) {
+      // handel error
+      emit(PostsErrorState(onError));
+    });
   }
 }
