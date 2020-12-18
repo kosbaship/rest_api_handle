@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:rest_api_handle/post_repository.dart';
 
-class DioHelper {
+class ApiProvider implements PostRepository {
   var dataSourcePosts = [];
 
-  static DioHelper get = DioHelper();
+  // static DioHelper get = DioHelper();
 
-  fetchData() async {
+  @override
+  Future<List<dynamic>> fetchData() async {
     try {
       Dio dio = Dio();
       dio.options.baseUrl = 'https://jsonplaceholder.typicode.com/';
